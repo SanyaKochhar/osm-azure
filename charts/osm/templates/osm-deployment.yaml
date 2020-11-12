@@ -80,6 +80,13 @@ spec:
         - name: {{ .Values.OpenServiceMesh.fluentBit.name }}
           image: {{ .Values.OpenServiceMesh.fluentBit.image }}:{{ .Values.OpenServiceMesh.fluentBit.tag }}
           imagePullPolicy: {{ .Values.OpenServiceMesh.fluentBit.pullPolicy }}
+          env:
+          - name: HTTPS_PROXY
+            value: "10.240.0.7:3128"
+          - name: HTTP_PROXY
+            value: "10.240.0.7:3128"
+          - name: NO_PROXY
+            value: "10.0.0.0/16"
           volumeMounts:
           - name: config
             mountPath: /fluent-bit/etc
