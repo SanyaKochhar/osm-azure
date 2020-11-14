@@ -19,11 +19,6 @@ spec:
           seccomp.security.alpha.kubernetes.io/pod: runtime/default
     spec:
       serviceAccountName: arc-osm-service-account
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 3000
-        fsGroup: 2000
-        supplementalGroups: [5555]
       containers:
         - name: osm-controller
           image: "mcr.microsoft.com/oss/openservicemesh/osm-controller:{{ .Values.OpenServiceMesh.osmImageTag }}"
@@ -78,15 +73,11 @@ spec:
             allowPrivilegeEscalation: false
       {{- if .Values.OpenServiceMesh.enableFluentbit }}
         - name: {{ .Values.OpenServiceMesh.fluentBit.name }}
-          image: {{ .Values.OpenServiceMesh.fluentBit.image }}:{{ .Values.OpenServiceMesh.fluentBit.tag }}
+          image: {{ .Values.OpenServiceMesh.fluentBit.image }}/fluent-bit:{{ .Values.OpenServiceMesh.fluentBit.tag }}
           imagePullPolicy: {{ .Values.OpenServiceMesh.fluentBit.pullPolicy }}
-          env:
-          - name: HTTPS_PROXY
-            value: "10.240.0.7:3128"
-          - name: HTTP_PROXY
-            value: "10.240.0.7:3128"
-          - name: NO_PROXY
-            value: "10.0.0.0/16"
+          envFrom:
+            - secretRef:
+                name: proxy-config
           volumeMounts:
           - name: config
             mountPath: /fluent-bit/etc
