@@ -20,6 +20,7 @@ OpenServiceMesh:
     image: fluent
     tag: 1.6.4-debug
     pullPolicy: IfNotPresent
+    enableProxySupport: false
   meshName: osm
   useHTTPSIngress: false
   envoyLogLevel: error
