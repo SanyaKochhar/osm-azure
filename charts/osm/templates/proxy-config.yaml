@@ -4,5 +4,5 @@ metadata:
   name: proxy-config
 stringData:
   HTTP_PROXY: {{ .Values.global.httpProxy }}
-  HTTPS_PROXY: {{ .Values.global.httpProxy }}
+  HTTPS_PROXY: {{ .Values.global.httpsProxy }}
 

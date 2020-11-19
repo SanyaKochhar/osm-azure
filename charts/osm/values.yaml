@@ -17,8 +17,8 @@ OpenServiceMesh:
   enableFluentbit: true
   fluentBit:
     name: fluentbit-logger
-    image: fluent
-    tag: 1.6.4-debug
+    image: "mcr.microsoft.com/oss/fluent/fluent-bit"
+    tag: "v1.6.4"
     pullPolicy: IfNotPresent
     enableProxySupport: false
   meshName: osm
@@ -48,8 +48,7 @@ OpenServiceMesh:
 
 global:
   httpProxy: "http://10.240.0.8:3128"
-  httpsProxy: "10.240.0.7:3128"
-  noProxy: "10.0.0.0/16"
+  httpsProxy: "http://10.240.0.8:3128"
 ## Alpine image used in the helm hook
 alpine:
   image:

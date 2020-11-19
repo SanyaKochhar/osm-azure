@@ -19,7 +19,7 @@ data:
     [FILTER]
       name       grep
       match      *
-      regex     $log['log']['level'] error
+      regex     $log['log']['level'] trace
     [OUTPUT]
       Name        azure
       Match       *
