@@ -19,11 +19,6 @@ spec:
           seccomp.security.alpha.kubernetes.io/pod: runtime/default
     spec:
       serviceAccountName: arc-osm-service-account
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 3000
-        fsGroup: 2000
-        supplementalGroups: [5555]
       containers:
         - name: osm-controller
           image: "mcr.microsoft.com/oss/openservicemesh/osm-controller:{{ .Values.OpenServiceMesh.osmImageTag }}"

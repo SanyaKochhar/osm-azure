@@ -9,7 +9,7 @@ data:
     [SERVICE]
       Flush             5
       Daemon            off
-      Log_Level         debug
+      Log_Level         info
       Parsers_File      parser.conf
     [INPUT]
       Name    tail
@@ -19,8 +19,7 @@ data:
     [FILTER]
       Name           modify
       Match          kube.*
-      # Condition      Key_value_matches message /"level":"info"/
-      Condition      Key_value_matches level "info"
+      Condition      Key_value_matches message /"level":"info"/
       Set            keep true
     [FILTER]
       Name           modify
@@ -31,13 +30,6 @@ data:
       Name           grep
       Match          kube.*
       Regex          keep true
-    # [FILTER]
-    #   name       grep
-    #   match      *
-    #   regex     $log['log']['level'] info
-      # regex     $log['log'] \\"level\\":\\"error\\"
-      # regex     message /"level":"info"/
-      # regex   log info
     [OUTPUT]
       Name    stdout
       match   *  
