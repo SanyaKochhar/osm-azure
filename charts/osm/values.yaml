@@ -17,8 +17,10 @@ OpenServiceMesh:
   enableFluentbit: true
   fluentBit:
     name: fluentbit-logger
-    image: "mcr.microsoft.com/oss/fluent/fluent-bit"
-    tag: "v1.6.2"
+    # image: "mcr.microsoft.com/oss/fluent/fluent-bit"
+    # tag: "v1.6.4"
+    image: fluent
+    tag: 1.6.4-debug
     pullPolicy: IfNotPresent
   meshName: osm
   useHTTPSIngress: false

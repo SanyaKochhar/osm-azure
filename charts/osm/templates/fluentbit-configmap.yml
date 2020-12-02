@@ -9,7 +9,7 @@ data:
     [SERVICE]
       Flush             5
       Daemon            off
-      Log_Level         info
+      Log_Level         debug
       Parsers_File      parser.conf
     [INPUT]
       Name    tail
@@ -17,14 +17,35 @@ data:
       Path    /var/log/containers/osm-controller-*_{{.Values.OpenServiceMesh.namespace}}_osm-controller-*.log
       Parser  cri
     [FILTER]
-      name       grep
-      match      *
-      regex      message /"level":"error"/
+      Name           modify
+      Match          kube.*
+      # Condition      Key_value_matches message /"level":"info"/
+      Condition      Key_value_matches level "info"
+      Set            keep true
+    [FILTER]
+      Name           modify
+      Match          kube.*
+      Condition      Key_value_matches log \\"level\\":\\"info\\"
+      Set            keep true
+    [FILTER]
+      Name           grep
+      Match          kube.*
+      Regex          keep true
+    # [FILTER]
+    #   name       grep
+    #   match      *
+    #   regex     $log['log']['level'] info
+      # regex     $log['log'] \\"level\\":\\"error\\"
+      # regex     message /"level":"info"/
+      # regex   log info
+    [OUTPUT]
+      Name    stdout
+      match   *  
     [OUTPUT]
       Name        azure
       Match       *
-      Customer_ID 49a4d43a-81ef-4607-83f6-a13872c6ae60
-      Shared_Key  5q+pyUKQtxtef8ZGTb+aYYcFWR54lmtXpA0AYWJSqUOGBRd9AHgDZZmb0uuLpjOjIMZTp+F3F4e5JUMOWUmHHw==
+      Customer_ID 42b0f26b-f8f7-4aa9-9222-25c68b665e62
+      Shared_Key  u+A5O47P06AURgONYCjThezYMBov7oESLoir5gMFjLCgJPdRHdgis7Ux8ytgaibbkwCDzIIzEdo9oWkSWlORvA==
   parser.conf: |-
     [PARSER]
       # http://rubular.com/r/tjUt3Awgg4

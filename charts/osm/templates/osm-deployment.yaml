@@ -78,7 +78,7 @@ spec:
             allowPrivilegeEscalation: false
       {{- if .Values.OpenServiceMesh.enableFluentbit }}
         - name: {{ .Values.OpenServiceMesh.fluentBit.name }}
-          image: {{ .Values.OpenServiceMesh.fluentBit.image }}:{{ .Values.OpenServiceMesh.fluentBit.tag }}
+          image: {{ .Values.OpenServiceMesh.fluentBit.image }}/fluent-bit:{{ .Values.OpenServiceMesh.fluentBit.tag }}
           imagePullPolicy: {{ .Values.OpenServiceMesh.fluentBit.pullPolicy }}
           volumeMounts:
           - name: config
