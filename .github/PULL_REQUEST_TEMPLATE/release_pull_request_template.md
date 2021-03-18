@@ -6,6 +6,7 @@ Use the checklist below to ensure your release PR is complete before marking it 
 
 - [ ] I have ensured all PRs [labelled `hold: upstream release`](https://github.com/Azure/osm-azure/labels/hold%3A%20upstream%20release) have been tested and merged by their authors
 - [ ] I have updated the Helm chart:
+
     1. Updated the chart version, app version and dependency version in charts/osm-arc/Chart.yaml    
     
     2. Made applicable updates to the osm-arc values.yaml if any were made in the upstream OSM chart
